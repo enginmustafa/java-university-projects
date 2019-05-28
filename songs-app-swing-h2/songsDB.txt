@@ -1,0 +1,29 @@
+create table Artists (
+Artist_Id identity,
+Fname varchar(60) not null,
+Nname varchar(30) unique not null
+)
+
+create table Songs(
+Song_Id identity,
+Title varchar(100) not null,
+Release_Date int,
+Artist_Id int,
+foreign key (ARTIST_ID) references Artists(ARTIST_ID) on delete cascade,
+Genre_Id int,
+foreign key (Genre_Id) references Genres(Genre_Id) on delete cascade,
+check (Release_Date>1700 and Release_date<2099)
+)
+
+create table Genres(
+Genre_Id identity,
+Genre varchar(30) unique not null,
+)
+
+select Title,Nname,Genre
+from Songs s join Artists a
+on s.Artist_Id=a.Artist_Id
+join Genres g
+on s.Genre_Id=g.Genre_Id
+
+
